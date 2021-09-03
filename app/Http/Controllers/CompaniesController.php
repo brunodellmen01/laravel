@@ -74,7 +74,7 @@ class CompaniesController extends Controller
     public function edit($id)
     {
         try {
-            $company = Companies::firstOrFail($id);
+            $company = Companies::findOrFail($id);
             return view('company.edit', compact('company'));
         } catch (\Throwable $th) {
             Session::flash('flash_error', 'Registro editado com sucesso!');
@@ -94,7 +94,7 @@ class CompaniesController extends Controller
     public function update(CompaniesRequest $request, $id)
     {
         try {
-            $company = Companies::firstOrFail($id);
+            $company = Companies::findOrFail($id);
             $company->fill($request->all())->update();
             Session::flash('flash_success', 'Registro atualizado com sucesso');
             return redirect()->action(

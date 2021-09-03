@@ -76,7 +76,7 @@ class EmployeesController extends Controller
     public function edit($id)
     {
         try {
-            $employee = Employees::firstOrFail($id);
+            $employee = Employees::findOrFail($id);
             $company_id = Companies::pluck('name', 'id');
             return view('employee.edit', compact('employee', 'company_id'));
         } catch (\Throwable $th) {
@@ -97,8 +97,8 @@ class EmployeesController extends Controller
     public function update(EmployeesRequest $request, $id)
     {
         try {
-            $employee = Employees::firstOrFail($id);
-            $employee->fill($request->all())->update();
+            $employee = Employees::findOrFail($id);
+            $employee->update($request->all());
             Session::flash('flash_success', 'Registro atualizado com sucesso');
             return redirect()->action(
                 [EmployeesController::class, 'index']
