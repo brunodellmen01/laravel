@@ -23,7 +23,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        {{Auth::user()->role->name}}
+        Nível: {{Auth::user()->role->name}}
     </div>
 
     <!-- Nav Item - Tables -->
