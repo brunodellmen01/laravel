@@ -16,7 +16,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    {{ Form::open(['url' => 'companies', 'class' => 'needs-validation', 'novalidate']) }}
+                                    {{ Form::open(['url' => 'companies', 'class' => 'needs-validation', 'novalidate', 'enctype'=>'multipart/form-data']) }}
                                     @csrf
                                     <div class="col-md-12">
                                         <div class="row">
@@ -44,6 +44,15 @@
                                                     {{ Form::text('site', null, ['required', 'class' => 'form-control ' . ($errors->has('site') ? ' is-invalid' : null), 'autocomplete' => 'off', 'placeholder' => 'Insira o site', 'maxlength' => '150', 'minlength' => '3']) }}
                                                     <small class="invalid-feedback">
                                                         {!! $errors->first('site') !!}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    {{ Form::label('label', 'Logo') }}:
+                                                    {{ Form::file('logotipo') }}
+                                                    <small class="invalid-feedback">
+                                                        {!! $errors->first('logotipo') !!}
                                                     </small>
                                                 </div>
                                             </div>

@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class CompaniesController extends Controller
 {
+    private $companies;
+
+    public function __construct(Companies $companies)
+    {
+        $this->companies = $companies;
+        $this->path = 'armazenamento/aplicativo/';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +48,15 @@ class CompaniesController extends Controller
     public function store(CompaniesRequest $request)
     {
         try {
-            Companies::create($request->all());
+            $imageName = time() . '.' . $request->logotipo->extension();
+            $request->logotipo->move(public_path($this->path), $imageName);
+            $companies = Companies::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'logotipo' => $imageName,
+                'site' => $request->site
+            ]);
+
             Session::flash('flash_success', 'Registrado com sucesso');
             return redirect()->action(
                 [CompaniesController::class, 'index']
@@ -95,7 +110,16 @@ class CompaniesController extends Controller
     {
         try {
             $company = Companies::findOrFail($id);
-            $company->fill($request->all())->update();
+            $imageName = time() . '.' . $request->logotipo->extension();
+            $request->logotipo->move(public_path($this->path), $imageName);
+            $company->fill([
+                'name' => $request->name,
+                'email' => $request->email,
+                'logotipo' => $imageName,
+                'site' => $request->site
+            ])->update();
+
+
             Session::flash('flash_success', 'Registro atualizado com sucesso');
             return redirect()->action(
                 [CompaniesController::class, 'index']

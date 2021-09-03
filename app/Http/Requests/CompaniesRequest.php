@@ -34,6 +34,7 @@ class CompaniesRequest extends FormRequest
                         'name'        => 'required|string|min:3|max:150',
                         'email'        => 'nullable|email|min:3|max:150',
                         'site'        => 'nullable|string|min:3|max:150',
+                        'logotipo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     ];
                 }
 
@@ -43,6 +44,7 @@ class CompaniesRequest extends FormRequest
                         'name'        => 'required|string|min:3|max:150',
                         'email'        => 'nullable|email|min:3|max:150',
                         'site'        => 'nullable|string|min:3|max:150',
+                        'logotipo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     ];
                 }
         }

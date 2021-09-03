@@ -6,8 +6,7 @@
             <div class="card card-table flex-fill">
                 <div class="card-header">
                     <div class="btn-group float-right">
-                        <a href="{{ route('companies.index') }}" type="button"
-                            class="btn btn-outline-info">Voltar
+                        <a href="{{ route('companies.index') }}" type="button" class="btn btn-outline-info">Voltar
                         </a>
                     </div>
                 </div>
@@ -16,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    {{ Form::model($company, array('route' => array('companies.update', $company->id), 'method' => 'PUT', 'class' => 'needs-validation')) }}
+                                    {{ Form::model($company, ['route' => ['companies.update', $company->id], 'method' => 'PUT', 'class' => 'needs-validation', 'enctype' => 'multipart/form-data']) }}
                                     @method('PATCH')
                                     <div class="col-md-12">
                                         <div class="row">
@@ -45,6 +44,50 @@
                                                     <small class="invalid-feedback">
                                                         {!! $errors->first('site') !!}
                                                     </small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    {{ Form::label('label', 'Logo') }}:
+                                                    {{ Form::file('logotipo') }}
+                                                    <small class="invalid-feedback">
+                                                        {!! $errors->first('logotipo') !!}
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <hr>
+                                                    @if ($company->logotipo == '' || $company->logotipo == 'semlogo.png')
+                                                        <img loading="lazy" class="img-responsive img-thumbnail"
+                                                            src="{{ asset('armazenamento/aplicativo/camera.png') }}"
+                                                            width="120px">
+                                                    @else
+                                                        <img class="img-responsive img-thumbnail"
+                                                            src="{{ asset('armazenamento/aplicativo/' . $company->logotipo) }}"
+                                                            width="100" height="100">
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <hr>
+                                                    @if ($company->logotipo == '' || $company->logotipo == 'semlogo.png')
+                                                        <p>Esta empresa não possui foto.</p>
+                                                        @else
+                                                        <h4 class="text-center">Dados da Imagem</h4>
+                                                        <p>
+                                                          <b>Nome:</b> {{$company->logotipo}}
+                                                        </p>
+                                                        <p>
+                                                          <b>Formato:</b> {{ pathinfo($company->logotipo, PATHINFO_EXTENSION)}}
+                                                        </p>
+                                                        <p>
+                                                          <b>Cadastrado em:</b> {{ date( 'd/m/Y' , strtotime($company->created_at))}} as {{ date( 'H:m:s' , strtotime($company->created_at))}}
+                                                        </p>
+                                                        @endif
                                                 </div>
                                             </div>
                                         </div>
