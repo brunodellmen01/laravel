@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompaniesRequest;
 use App\Models\Companies;
 use Exception;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class CompaniesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompaniesRequest $request)
     {
         try {
             Companies::create($request->all());
@@ -90,7 +91,7 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompaniesRequest $request, $id)
     {
         try {
             $company = Companies::firstOrFail($id);

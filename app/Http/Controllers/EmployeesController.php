@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeesRequest;
 use App\Models\Companies;
 use App\Models\Employees;
 use Exception;
@@ -39,7 +40,7 @@ class EmployeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeesRequest $request)
     {
         try {
             Employees::create($request->all());
@@ -93,7 +94,7 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmployeesRequest $request, $id)
     {
         try {
             $employee = Employees::firstOrFail($id);
