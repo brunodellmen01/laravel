@@ -16,7 +16,7 @@ class RolesSeeder extends Seeder
     {
         ModelsRoles::insert([
 		    [
-		        'name' => 'ADM',
+		        'name' => 'Administrador',
 
             ]
 		]);
